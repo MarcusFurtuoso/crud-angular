@@ -1,0 +1,32 @@
+<mat-table [dataSource]="torneio">
+  <!-- Name Column -->
+  <ng-container matColumnDef="nome">
+    <mat-header-cell *matHeaderCellDef>Torneio</mat-header-cell>
+    <mat-cell *matCellDef="let torneio">{{ torneio.nome }}</mat-cell>
+  </ng-container>
+
+  <!-- Category Column -->
+  <ng-container matColumnDef="premiacao">
+    <mat-header-cell *matHeaderCellDef>Premiação</mat-header-cell>
+    <mat-cell  *matCellDef="let torneio">{{ torneio.premiacao }}</mat-cell>
+  </ng-container>
+
+  <!-- Actions Column -->
+  <ng-container matColumnDef="actions">
+    <mat-header-cell *matHeaderCellDef> </mat-header-cell>
+
+    <mat-cell *matCellDef="let torneios">
+      <button
+        mat-mini-fab
+        color="primary"
+        aria-label="Inscrever-se no torneio" class="action-column-header"
+        (click)="onAdd()"
+      >
+        <mat-icon>add</mat-icon>
+      </button>
+    </mat-cell>
+  </ng-container>
+
+  <mat-header-row  *matHeaderRowDef="displayedColumns"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+</mat-table>
