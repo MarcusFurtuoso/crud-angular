@@ -5,28 +5,58 @@
     <mat-cell *matCellDef="let torneio">{{ torneio.nome }}</mat-cell>
   </ng-container>
 
-  <!-- Category Column -->
+   <!-- Category Column -->
+   <ng-container matColumnDef="category">
+    <mat-header-cell *matHeaderCellDef>Categoria</mat-header-cell>
+    <mat-cell *matCellDef="let course">
+      {{ course.category }}
+      <mat-icon aria-hidden="false" aria-label="Categoria do Curso">{{
+        course.category | category
+      }}</mat-icon>
+    </mat-cell>
+  </ng-container>
+
+  <!-- Premiacao Column -->
   <ng-container matColumnDef="premiacao">
     <mat-header-cell *matHeaderCellDef>Premiação</mat-header-cell>
-    <mat-cell  *matCellDef="let torneio">{{ torneio.premiacao }}</mat-cell>
+    <mat-cell *matCellDef="let torneio">{{ torneio.premiacao }}</mat-cell>
   </ng-container>
 
   <!-- Actions Column -->
   <ng-container matColumnDef="actions">
-    <mat-header-cell *matHeaderCellDef> </mat-header-cell>
-
-    <mat-cell *matCellDef="let torneios">
+    <mat-header-cell *matHeaderCellDef>
       <button
-        mat-mini-fab
+        mat-fab
         color="primary"
-        aria-label="Inscrever-se no torneio" class="action-column-header"
+        aria-label="Cadastrar torneio"
+        class="action-column-header"
         (click)="onAdd()"
       >
         <mat-icon>add</mat-icon>
       </button>
+    </mat-header-cell>
+
+    <mat-cell *matCellDef="let torneios" class="action-column">
+      <button
+        mat-icon-button
+        color="primary"
+        aria-label="Editar torneio"
+        (click)="onEdit(torneios)"
+      >
+        <mat-icon>edit</mat-icon>
+      </button>
+
+      <button
+        mat-icon-button
+        color="warn"
+        aria-label="Deletar torneio"
+        (click)="onDelete(torneios)"
+      >
+        <mat-icon>delete</mat-icon>
+      </button>
     </mat-cell>
   </ng-container>
 
-  <mat-header-row  *matHeaderRowDef="displayedColumns"></mat-header-row>
+  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
   <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
 </mat-table>

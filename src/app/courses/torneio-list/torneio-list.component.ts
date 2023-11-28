@@ -1,28 +1,33 @@
-import { Component, Input } from '@angular/core';
-import { Torneio } from '../model/torneio';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Torneio } from './../model/torneio';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'app-torneio-list',
   templateUrl: './torneio-list.component.html',
-  styleUrls: ['./torneio-list.component.scss']
+  styleUrls: ['./torneio-list.component.scss'],
 })
 export class TorneioListComponent {
 
   @Input() torneio: Torneio[] = [];
+  @Output() add = new EventEmitter(false);
+  @Output() edit = new EventEmitter(false);
+  @Output() remove = new EventEmitter(false);
 
-  readonly displayedColumns = ['nome', 'premiacao', 'actions'];
+  readonly displayedColumns = ['nome', 'category', 'premiacao', 'actions'];
 
-  constructor(private router: Router,
-    private route: ActivatedRoute) {}
+  constructor() {}
 
+  onAdd() {
+    this.add.emit(true);
+  }
 
-    onAdd() {
-      this.router.navigate(['inscricao'], {relativeTo: this.route})
-    }
+  onEdit(torneio: Torneio) {
+    this.edit.emit(torneio);
+  }
 
-
-
+  onDelete(torneio: Torneio) {
+    this.remove.emit(torneio);
+  }
 
 
 }

@@ -8,9 +8,12 @@ import { SharedModule } from '../shared/shared.module';
 import { TorneioFormComponent } from './torneio-form/torneio-form.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { TorneioListComponent } from './torneio-list/torneio-list.component';
+import { AuthComponent } from './auth/auth.component';
+import { AppComponent } from './app/app.component';
+import { CadastroComponent } from './cadastro/cadastro.component';
 
 @NgModule({
-  declarations: [TorneiosComponent, TorneioFormComponent, TorneioListComponent],
+  declarations: [TorneiosComponent, TorneioFormComponent, TorneioListComponent, AuthComponent, AppComponent, CadastroComponent],
   imports: [
     CommonModule,
     TorneioRoutingModule,

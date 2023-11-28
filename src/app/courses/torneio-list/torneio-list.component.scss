@@ -4,9 +4,14 @@
 }
 
 .action-column {
-  flex: 0 0 75px;
+  margin: 0 auto;
+  justify-content: end;
 }
 
 .action-column-header {
-  margin: 0 370px;
+  margin: 0 250px;
+  max-height: 50px;
+  max-width: 50px;
 }
+
+

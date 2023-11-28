@@ -1,33 +1,32 @@
 <mat-card>
   <mat-card-content>
-    <mat-toolbar color="primary"> Inscrição no Torneio </mat-toolbar>
+    <mat-toolbar color="primary" style="justify-content: center">Detalhes do Torneio </mat-toolbar>
 
     <form [formGroup]="form" class="min-width">
       <mat-form-field class="full-width">
-        <input matInput placeholder="Nome" formControlName="nome" />
+        <input matInput placeholder="Nome*" formControlName="nome" #nome />
+        <mat-hint align="end">{{nome.value.length}}/100</mat-hint>
+        <mat-error *ngIf="form.get('nome')?.invalid">{{getErrorMessage('nome')}}</mat-error>
       </mat-form-field>
 
       <mat-form-field class="full-width">
         <mat-label>Categoria</mat-label>
-        <mat-select formControlName="categoriaId" >
-          <mat-option value=1>Iniciante</mat-option>
-          <mat-option value="intermediario">Intermediário</mat-option>
-          <mat-option value="Avançado">Avançado</mat-option>
+        <mat-select formControlName="category">
+          <mat-option value="Front-end">Front-End</mat-option>
+          <mat-option value="Back-end">Back-End</mat-option>
         </mat-select>
+      </mat-form-field>
 
+      <mat-form-field class="full-width">
+        <input matInput placeholder="Premiação*" formControlName="premiacao" #premiacao/>
+        <mat-hint align="end">{{premiacao.value.length}}/10</mat-hint>
+        <mat-error *ngIf="form.get('premiacao')?.invalid">{{getErrorMessage('premiacao')}}</mat-error>
       </mat-form-field>
     </form>
-
-    <mat-card class="card-premiacao">
-      <mat-card-content>Premiação: R$5000</mat-card-content>
-    </mat-card>
-
-
   </mat-card-content>
 
   <mat-card-actions>
-    <button mat-raised-button color="primary" (click)=onSubmit()>Salvar </button>
-    <button  mat-raised-button (click)=onCancel()>Cancelar</button>
+    <button mat-raised-button color="primary" (click)="onSubmit()">Salvar</button>
+    <button mat-raised-button (click)="onCancel()">Cancelar</button>
   </mat-card-actions>
-
 </mat-card>

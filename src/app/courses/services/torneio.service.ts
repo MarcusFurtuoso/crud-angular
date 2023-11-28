@@ -2,29 +2,46 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { delay, first, tap } from 'rxjs/operators';
 import { Torneio } from '../model/torneio';
-import { Inscricao } from '../model/inscricao';
 
 @Injectable({
   providedIn: 'root',
 
 })
 export class TorneioService {
-  // private readonly API = '/assets/torneios.json';
-  private readonly APITORNEIO = 'api/torneio';
-  private readonly APIINSCRICAO = 'api/inscricao';
-  private readonly APIUSUARIO = 'api/usuario';
-  private readonly APICATEGORIA = 'api/categoria';
+
+  private readonly API = 'api/torneio';
 
   constructor(private httpClient: HttpClient) {}
 
   list() {
-    return this.httpClient.get<Torneio[]>(this.APITORNEIO).pipe(
+    return this.httpClient.get<Torneio[]>(this.API).pipe(
       first(),
-      tap((torneio) => console.log(torneio))
     );
   }
 
-  save(record: Partial<Inscricao>) {
-    return this.httpClient.post<Torneio>(this.APIINSCRICAO, record).pipe(first());
+  save(record: Partial<Torneio>) {
+
+    if(record.id) {
+      return this.update(record);
+    }
+    return this.create(record);
   }
+
+  private create(record: Partial<Torneio>) {
+    return this.httpClient.post<Torneio>(this.API, record).pipe(first());
+  }
+
+  private update(record: Partial<Torneio>) {
+    return this.httpClient.put<Torneio>(`${this.API}/${record.id}`, record).pipe(first());
+  }
+
+  loadById(id: string) {
+    return this.httpClient.get<Torneio>(`${this.API}/${id}`);
+  }
+
+
+  remove(id: string) {
+    return this.httpClient.delete(`${this.API}/${id}`).pipe(first());
+  }
+
 }

@@ -6,6 +6,9 @@
       <app-torneio-list
         *ngIf="torneios$ | async as torneio; else loading"
         [torneio]="torneio"
+        (add)="onAdd()"
+        (edit)="onEdit($event)"
+        (remove)="onRemove($event)"
       ></app-torneio-list>
 
       <div></div>
